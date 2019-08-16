@@ -3,7 +3,7 @@
   flex-direction: row;
 }
 
-.xkcdMain-nav, .xkcdMain-headers, .xkcd {
+.xkcdMain-nav, .xkcdMain-headers, .xkcdMain-xkcd {
   max-width: 50vw;
   margin: 0 auto;
   border: 1.5px solid #071419;

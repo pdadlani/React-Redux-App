@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 
@@ -8,6 +8,20 @@ import Xkcd from './Xkcd.js';
 import './xkcd.css';
 
 const XkcdMain = props => {
+  const [random, setRandom] = useState('');
+  // const [prev, setPrev] = useState('');
+  // const [next, setNext] = useState('');
+
+
+  const randomHelper = () => {
+    const queryNumber = Math.floor(Math.random() * (2100 - 1) + 1);
+    console.log(queryNumber);
+    setRandom(queryNumber);
+    // setPrev(queryNumber - 1);
+    // setNext(queryNumber + 1)
+    props.getData(random);
+  }
+
   return (
     <>
       <div className = 'xkcdMain'>
@@ -23,16 +37,23 @@ const XkcdMain = props => {
         <div className='xkcdMain-headers'>
           <h1>xkcd</h1>
           <h2>A webcomic of romance, sarcasm, math, and language.</h2>
-          <button onClick={props.getData}>
-            {props.isLoading ? (
-              <Loader type="TailSpin" color="#00BFFF" height={100} width={100} />
-            ) : (
-                'Get xkcd'
-              )}
-          </button>
+
         </div>
       </div>
-      <Xkcd xkcd={props.xkcd} />
+      <div className='xkcdMain-xkcd'>
+        <button onClick={() => props.getData(setRandom(''))}>
+          {props.isLoading ? (
+            <Loader type="TailSpin" color="#00BFFF" height={100} width={100} />
+          ) : (
+              'Today'
+            )}
+        </button>
+        <Xkcd xkcd={props.xkcd} />
+        {/* <button onClick={() => props.getData(prev)}>❮ Prev</button> */}
+
+        <button onClick={randomHelper}>Random</button>
+        {/* <button onClick={() => props.getData(next)}>Next ❯</button> */}
+      </div>
     </>
   )
 }
